@@ -8,11 +8,11 @@ const { MongoClient } = require('mongodb');
 
 
 async function main() {
-  const url = 'mongodb://localhost:27017';
+  const url = ' ';
   const client = new MongoClient(url);
 
   // Database Name
-  const dbName = 'datadb';
+  const dbName = 'phonebooks';
   await client.connect();
   console.log('running on port 3000');
   const db = client.db(dbName);

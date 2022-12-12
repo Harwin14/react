@@ -48,14 +48,14 @@ module.exports = (db) => {
         }
         // console.log(req.query.boolean)
         // console.log(noSql)
-        db.collection("breads").find(noSql).toArray((err, result) => {
+        db.collection("users").find(noSql).toArray((err, result) => {
             if (err) {
                 console.error(err)
             }
             let total = result.length
             const pages = Math.ceil(total / limit)
 
-            db.collection("breads").find(noSql).skip(offset).limit(limit).sort(sortMode).toArray((err, data) => {
+            db.collection("users").find(noSql).skip(offset).limit(limit).sort(sortMode).toArray((err, data) => {
                 if (err) {
                     console.log(err)
                 }
@@ -78,7 +78,7 @@ module.exports = (db) => {
             boolean: req.body.boolean
         }
 
-        db.collection("breads").insertOne(myobj, (err, res) => {
+        db.collection("users").insertOne(myobj, (err, res) => {
             if (err) throw err
         })
 
@@ -87,7 +87,7 @@ module.exports = (db) => {
 
     //=========DELETE===========\\
     router.get('/delete/:id', (req, res) => {
-        db.collection("breads").deleteOne({ "_id": ObjectId(`${req.params.id}`) }, (err) => {
+        db.collection("users").deleteOne({ "_id": ObjectId(`${req.params.id}`) }, (err) => {
             if (err) {
                 console.error(err)
             }
@@ -96,7 +96,7 @@ module.exports = (db) => {
     })
 
     router.get('/edit/:id', (req, res) => {
-        db.collection("breads").find({ "_id": ObjectId(`${req.params.id}`) }).toArray((err, data) => {
+        db.collection("users").find({ "_id": ObjectId(`${req.params.id}`) }).toArray((err, data) => {
             if (err) {
                 console.log(err)
             } //console.log(data[0])
@@ -114,7 +114,7 @@ module.exports = (db) => {
             boolean: req.body.boolean
         }
 
-        db.collection("breads").updateOne({ "_id": ObjectId(`${req.params.id}`) }, { $set: myobj }, (err, res) => {
+        db.collection("users").updateOne({ "_id": ObjectId(`${req.params.id}`) }, { $set: myobj }, (err, res) => {
             if (err) throw err
             // console.log(myobj)
         })
