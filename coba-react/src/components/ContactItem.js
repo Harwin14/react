@@ -1,4 +1,4 @@
-export default function Phoneitem(props) {
+export default function ContactItem(props) {
     return (
         <tr>
             <td>{props.no}</td>

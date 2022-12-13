@@ -1,5 +1,5 @@
 import { Component } from "react";
-export default class PhoneForm extends Component {
+export default class ContactForm extends Component {
 
     constructor(props) {
         super(props)

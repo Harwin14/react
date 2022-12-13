@@ -1,6 +1,6 @@
-import Phoneitem from "./PhoneItem"
+import ContactItem from "./ContactItem"
 
-export default function PhoneList(props) {
+export default function ContactList(props) {
     return (
         <table className="table table-striped">
             <thead>
@@ -12,7 +12,7 @@ export default function PhoneList(props) {
             </thead>
             <tbody>
                 {props.data.map((user, index) => (
-                  <Phoneitem 
+                  <ContactItem 
                   no={index +1} 
                   name={user.name} 
                   phone={user.phone} />
