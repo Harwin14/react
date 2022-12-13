@@ -6,4 +6,4 @@ export default function ContactItem(props) {
             <td>{props.phone}</td>
         </tr>
     )
-} 
+}
