@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.name{
+  margin-top: 45px ;
+  margin-left: 20px;
+font-weight: bold;
+}
+.input-name{
+  margin-top: 40px ;
+  margin-left: -15px;
+}
+.phone{
+  margin-top: 45px ;
+  margin-left: -15px;
+  font-weight: bold;
+}
+.input-phone{
+  margin-top: 40px ;
+  margin-left: -15px;
+}
+.btn-s{
+  --bs-btn-color: rgb(253, 247, 247);
+  --bs-btn-bg: #1baf27;
+  --bs-btn-border-color: #0f0307;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #2cff2c;
+  --bs-btn-hover-border-color: #ff2020;
+  --bs-btn-focus-shadow-rgb: 217,164,6;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #ffcd39;
+  --bs-btn-active-border-color: #ffc720;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #ffc107;
+  --bs-btn-disabled-border-color: #030302;
+}
+.btn-d{
+  --bs-btn-color: rgb(250, 239, 239);
+--bs-btn-bg: #c91818;
+--bs-btn-border-color: #181817;
+--bs-btn-hover-color: #000;
+--bs-btn-hover-bg: #e41809;
+--bs-btn-hover-border-color: #15e230;
+--bs-btn-focus-shadow-rgb: 217,164,6;
+--bs-btn-active-color: #000;
+--bs-btn-active-bg: #ffcd39;
+--bs-btn-active-border-color: #ffc720;
+--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+--bs-btn-disabled-color: #000;
+--bs-btn-disabled-bg: #ffc107;
+--bs-btn-disabled-border-color: #ffc107;
+margin-left: 3px;
+}
+.btn-p{
+  --bs-btn-color: #fff;
+--bs-btn-bg: #1e21d1;
+--bs-btn-border-color: #5e9bf7;
+--bs-btn-hover-color: #000;
+--bs-btn-hover-bg: #1968df;
+--bs-btn-hover-border-color: #2e51ec;
+--bs-btn-focus-shadow-rgb: 49,132,253;
+--bs-btn-active-color: #fff;
+--bs-btn-active-bg: #0a58ca;
+--bs-btn-active-border-color: #0a53be;
+--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+--bs-btn-disabled-color: #fff;
+--bs-btn-disabled-bg: #0d6efd;
+--bs-btn-disabled-border-color: #0d6efd;
+}
