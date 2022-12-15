@@ -30,12 +30,11 @@ export default class ContactItem extends Component {
     render() {
         if (this.state.isEdit) {
             return (
-                <tr>
-                    <td>{this.props.no}</td>
+                <tr className="r">
+                <td>{this.props.no}</td>
                     <td>
                         <input id="name" name="name" type="string" className="form-control" value={this.state.name} onChange={this.handleInputChange}/>
-                    </td>
-                       
+                    </td> 
                     <td>
                         <input name="phone" id="name" type="text" className="form-control" value={this.state.phone} onChange={this.handleInputChange} />
                     </td>
@@ -51,7 +50,7 @@ export default class ContactItem extends Component {
             )
         } else {
             return (
-                <tr>
+                <tr className="r">
                     <td>{this.props.no}</td>
                     <td>{this.props.name}</td>
                     <td>{this.props.phone}</td>

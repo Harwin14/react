@@ -3,12 +3,11 @@ import axios from 'axios'
 import ContactForm from "./ContactForm";
 import ContactList from "./ContactList";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faContactBook } from '@fortawesome/free-solid-svg-icons'
 
 
 //import klo data mau dimasukin
 //export untuk export data
-
 
 
 export default class ContactBox extends Component {
@@ -18,6 +17,7 @@ export default class ContactBox extends Component {
             contacts: []
         }
     }
+
     componentDidMount() {
         axios.get(`http://localhost:3000/users`)
             .then(response => {
@@ -30,11 +30,13 @@ export default class ContactBox extends Component {
 
     addContact = async (name, phone) => {
         try {
+            const id = Date.now()
             this.setState((state) => {
                 return {
                     contacts: [
                         ...state.contacts,
                         {
+                            id,
                             name,
                             phone
                         }
@@ -42,17 +44,8 @@ export default class ContactBox extends Component {
                     ]
                 };
             });
-          await axios.post(`http://localhost:3000/users`, { name, phone })
-        } catch (err) {
-            console.log(err)
-        }
-    }
-    
-    updateContact = async (id, name, phone) => {
-        try {
-            const { data } = await axios.put(`http://localhost:3000/users/${id}`, { name, phone })
-
-            if (data.success) {
+            const { data } = await axios.post(`http://localhost:3000/users`, { name, phone })
+            if (data) {
                 this.setState((state) => ({
                     contacts: state.contacts.map(user => {
                         if (user.id === id) {
@@ -61,8 +54,24 @@ export default class ContactBox extends Component {
                         return user
                     })
                 }))
-            } else {
-                console.log(data.data)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    updateContact = async (id, name, phone) => {
+        try {
+            const { data } = await axios.put(`http://localhost:3000/users/${id}`, { name, phone })
+            if (data) {
+                this.setState((state) => ({
+                    contacts: state.contacts.map(user => {
+                        if (user.id === id) {
+                            return { ...data.data }
+                        }
+                        return user
+                    })
+                }))
             }
         } catch (err) {
             console.log(err)
@@ -86,35 +95,22 @@ export default class ContactBox extends Component {
     }
 
 
-
-
     render() {
         return (
-            <div className="container">
+            <div className="container shadow">
                 <div className="card">
                     <div className="card-header">
-                        <h1 className="text-center">Phone Book Apps</h1>
+                        <h1 className="text-center font"><FontAwesomeIcon icon={faContactBook} /> Phone Book Apps</h1>
                     </div>
                     <div className="card-body">
-                        <div className="col-md-2">
-                            <button type="submit" className="btn btn-p mx-2"><FontAwesomeIcon icon={faPlus} /> Add</button>
-                        </div>
-                        <br></br>
-                        <div className="card">
-                            <div className="card-header">
-                                Search Form
-                            </div>
-                            <ContactForm add={this.addContact} />
-                        </div>
-                        <ContactList
-                            data={this.state.contacts}
-                            update={this.updateContact}
-                            remove={this.removeContact}
-                        />
-
+                        <ContactForm add={this.addContact} />
                     </div>
-
                 </div>
+                <ContactList
+                    data={this.state.contacts}
+                    update={this.updateContact}
+                    remove={this.removeContact}
+                />
             </div>
         )
     }
