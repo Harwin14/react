@@ -26,8 +26,7 @@ export default class ContactBox extends Component {
             }).catch((err) => {
                 console.log(err)
             })
-    }  
-
+    }   
     addContact = async (name, phone) => {
         try {
             const id = Date.now()
