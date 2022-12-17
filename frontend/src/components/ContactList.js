@@ -9,7 +9,7 @@ export default function ContactList(props) {
                     <th>#</th>
                     <th>Name</th>
                     <th>Phone</th>
-                    <th>Actions</th>
+                    <th className="act">Actions</th>
                 </tr>
             </thead>
             <tbody>
