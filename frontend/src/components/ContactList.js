@@ -3,7 +3,7 @@ import ContactItem from "./ContactItem"
 
 export default function ContactList(props) {
     return (
-        <table className="table table-striped">
+        <table className="table">
             <thead >
                 <tr className="r">
                     <th>#</th>

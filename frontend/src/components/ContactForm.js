@@ -93,7 +93,6 @@ export default class ContactForm extends Component {
                                         <input type="string" className="form-control" id="phone" name="phone"  placeholder="name"></input>
                                     </div>
                                 </div>
-                                
                             </div>
                         </form>
                     </div>
