@@ -3,7 +3,7 @@ import ContactItem from "./ContactItem"
 
 export default function ContactList(props) {
     return (
-        <table className="table">
+        <table className="table table-striped">
             <thead >
                 <tr className="r">
                     <th>#</th>
@@ -13,15 +13,16 @@ export default function ContactList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.data.map((user, index) => (
-                    <ContactItem
-                        no={index + 1}
+                {props.data.map((user, index) => 
+                        <ContactItem
                         key={user.id}
-                        name={user.name}
-                        phone={user.phone}
+                        no={index + 1}
+                        contact={user}
+                        remove={() => props.remove(user.id)}
                         update={(name, phone) => props.update(user.id, name, phone)}
-                        remove={() => props.remove(user.id)} />
-                ))}
+                        resend={() => props.resend(user.id, user.name, user.phone)} 
+                        />
+                )}
             </tbody>
         </table>
     )

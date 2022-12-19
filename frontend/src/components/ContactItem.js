@@ -9,11 +9,11 @@ export default class ContactItem extends Component {
         super(props)
         this.state = {
             isEdit: false,
-            name: props.name,
-            phone: props.phone
+            name: props.contact.name,
+            phone: props.contact.phone
         }
     }
-    
+
     handleInputChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -23,27 +23,29 @@ export default class ContactItem extends Component {
             [name]: value
         });
     }
+
     handleUpdate = () => {
         this.props.update(this.state.name, this.state.phone)
         this.setState({ isEdit: false })
     }
+
     render() {
         if (this.state.isEdit) {
             return (
                 <tr className="r">
-                <td>{this.props.no}</td>
+                    <td>{this.props.no}</td>
                     <td>
-                        <input id="name" name="name" type="string" className="form-control" value={this.state.name} onChange={this.handleInputChange}/>
-                    </td> 
+                        <input id="name" name="name" type="text" className="form-control" value={this.state.name} onChange={this.handleInputChange} />
+                    </td>
                     <td>
                         <input name="phone" id="name" type="text" className="form-control" value={this.state.phone} onChange={this.handleInputChange} />
                     </td>
                     <td>
-                        <button className="btn btn-p " type="button"
-                                onClick={this.handleUpdate}><FontAwesomeIcon icon={faPencil} /> Save
+                        <button className="btn btn-p" type="button"
+                            onClick={this.handleUpdate}><FontAwesomeIcon icon={faPencil} /> Save
                         </button>
-                        <button className="btn btn-warning" type="button" 
-                                onClick={() => this.setState({ isEdit: false })}><FontAwesomeIcon icon={faTrashCan} /> Cancel
+                        <button className="btn btn-w" type="button"
+                            onClick={() => this.setState({ isEdit: false })}><FontAwesomeIcon icon={faTrashCan} /> Cancel
                         </button>
                     </td>
                 </tr>
@@ -52,14 +54,33 @@ export default class ContactItem extends Component {
             return (
                 <tr className="r">
                     <td>{this.props.no}</td>
-                    <td>{this.props.name}</td>
-                    <td>{this.props.phone}</td>
-                    <td>
-                        <button className="btn btn-s " type="button" onClick={() => this.setState({ isEdit: true })}><FontAwesomeIcon icon={faPencil} /> edit
-                        </button>
-                        <button className="btn btn-d" type="button" onClick={this.props.remove}><FontAwesomeIcon icon={faTrashCan} /> delete
-                        </button>
-                    </td>
+                    <td>{this.props.contact.name}</td>
+                    <td>{this.props.contact.phone}</td>
+                    {this.props.contact.sent ?
+                        <td>
+                            <button
+                                className="btn btn-s"
+                                type="button"
+                                onClick={() => this.setState({ isEdit: true })}>
+                                <FontAwesomeIcon icon={faPencil} /> edit
+                            </button>
+                            <button
+                                className={this.props.contact.sent ? "btn btn-d" : "btn btn-w"} type="button"
+                                onClick={this.props.contact.sent ? this.props.remove : this.props.resend}>
+                                <FontAwesomeIcon icon={faTrashCan} />
+                                {this.props.contact.sent ? " DELETE" : " RESEND"}
+                            </button>
+                        </td>
+                        :
+                        <td>
+                            <button
+                                className={this.props.contact.sent ? "btn btn-d" : "btn btn-w"} type="button"
+                                onClick={this.props.contact.sent ? this.props.remove : this.props.resend}>
+                                <FontAwesomeIcon icon={faTrashCan} />
+                                {this.props.contact.sent ? " DELETE" : " RESEND"}
+                            </button>
+                        </td>
+                    }
                 </tr>
             )
         }

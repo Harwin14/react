@@ -57,7 +57,7 @@ body {
 .btn-p {
   --bs-btn-color: #fff;
   --bs-btn-bg: #1e21d1;
-  --bs-btn-border-color: #5e9bf7;
+  --bs-btn-border-color: #000;
   --bs-btn-hover-color: #000;
   --bs-btn-hover-bg: #1968df;
   --bs-btn-hover-border-color: #2e51ec;
@@ -72,16 +72,16 @@ body {
 }
 
 .btn-w {
-  --bs-btn-color: #fff;
-  --bs-btn-bg: #fbbf24;
-  --bs-btn-border-color: #5e9bf7;
+  --bs-btn-color: rgb(250, 246, 246);
+  --bs-btn-bg: #e6a604;
+  --bs-btn-border-color: #000;
   --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #fde047;
-  --bs-btn-hover-border-color: #2e51ec;
+  --bs-btn-hover-bg: #fddd39;
+  --bs-btn-hover-border-color: #000;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #0a58ca;
-  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-active-border-color: #000;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #0d6efd;
