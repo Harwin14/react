@@ -303,7 +303,7 @@ export default class ContactBox extends Component {
             }
         } catch (err) {
             alert('Failed to resend data')
-            console.log(err)
+            console.log(err) 
         }
     }
 
