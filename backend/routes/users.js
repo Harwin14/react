@@ -116,7 +116,7 @@ router.delete('/:id', async function (req, res, next) {
     res.json(new Response(user))
   } catch (err) {
     res.status(500).json(new Response(err, false))
-  } 
+  }
 }); 
  
 module.exports = router;
