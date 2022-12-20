@@ -289,9 +289,11 @@ export default class ContactBox extends Component {
     //         });
 
     // }
-    performSearch = async (query = {}) => {
+  
+    searchContact = async (query = {}) => {
         try {
-            const { data } = await request.get(`users/?query=${query}`)
+            console.log(query)
+            const { data } = await request.get(`users`,{ params:  { name: query } })
             console.log(data)
             if (data) {
                 this.setState({
@@ -317,7 +319,7 @@ export default class ContactBox extends Component {
                     </div>
                     <div className="card-body">
 
-                        <ContactForm add={this.addContact} onSearch={this.performSearch} />
+                        <ContactForm add={this.addContact} onSearch={this.searchContact} />
 
                     </div>
                 </div>{

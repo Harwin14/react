@@ -177,7 +177,6 @@ export default class ContactForm extends Component {
         //this.props.add dari contactbox
         this.props.onSearch(this.query.value);
         this.setState({ name: '', phone: '' })
-
     }
 
     render() {
@@ -220,14 +219,14 @@ export default class ContactForm extends Component {
                         <div className="card-header font">
                             Search Form
                         </div>
-                        <form className="g-3 my-2 px-4" >
+                        <form className="g-3 my-2 px-4"onSubmit={this.handleSubmitSearch} >
                             <div className="d-flex">
                                 <div className="d-flex align-items-center me-2">
                                     <div className="me-1 fw-bold">
                                         <label htmlFor="name">Name</label>
                                     </div>
                                     <div className="ms-1">
-                                        <input type="string" className="form-control" id="name" name="name"  placeholder="name"></input>
+                                        <input type="string" className="form-control" id="name" name="name" onChange={this.onSearchChange} ref={(input) => this.query = input} placeholder="name"></input>
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center ms-2">
@@ -238,7 +237,7 @@ export default class ContactForm extends Component {
                                         <input type="string" className="form-control" id="phone" name="phone"  placeholder="name"></input>
                                     </div>
                                 </div>
-                                
+                                <button className="search-button" type="submit" id="submit"></button>
                             </div>
                         </form>
                     </div>
@@ -254,14 +253,14 @@ export default class ContactForm extends Component {
                         <div className="card-header font">
                            <p>Search Form</p> 
                         </div>
-                        <form className="g-3 my-2 px-4" onSubmit={this.handleSubmitSearch}>
+                        <form className="g-3 my-2 px-4"onSubmit={this.handleSubmitSearch} >
                             <div className="d-flex">
                                 <div className="d-flex align-items-center me-2">
                                     <div className="me-1 fw-bold">
                                         <label htmlFor="name">Name</label>
                                     </div>
                                     <div className="ms-1">
-                                        <input type="search" className="form-control"  name="search" onChange={this.onSearchChange} ref={(input) => this.query = input} placeholder="name"></input>
+                                        <input type="string" className="form-control" id="name" name="name" onChange={this.onSearchChange} ref={(input) => this.query = input} placeholder="name"></input>
                                     </div>
                                 </div>
                                 <div className="d-flex align-items-center ms-2">
@@ -269,11 +268,10 @@ export default class ContactForm extends Component {
                                         <label htmlFor="phone">Phone</label>
                                     </div>
                                     <div className="ms-1">
-                                        <input type="search" className="form-control"  name="search" placeholder="phone"></input>
-                                        <button className="search-button" type="submit" id="submit">Go!</button>
+                                        <input type="string" className="form-control" id="phone" name="phone"onChange={this.onSearchChange}  ref={(input) => this.query = input} placeholder="name"></input>
                                     </div>
                                 </div>
-                               
+                                <button className="search-button" type="submit" id="submit"></button>
                             </div>
                         </form>
                     </div>

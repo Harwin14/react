@@ -2,14 +2,83 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models')
 var { Response } = require('../helpers/util')
+const { Op } = require('sequelize')
 
-
-router.get('/', async function (req, res, next) {
+/* GET users listing. */
+router.get('/', async (req, res, next) => {
   try {
-    const users = await models.User.findAll()
-    res.json(new Response(users))
-  } catch (err) {
-    res.status(500).json(new Response(err, false))
+    const { name, phone } = req.query
+
+    if (name && phone) {
+      const users = await models.User.findAll({
+        where: {
+          [Op.or]: [
+            {
+              name: {
+                [Op.iLike]: `%${name}%`
+              }
+            },
+            {
+              phone: {
+                [Op.iLike]: `%${phone}%`
+              }
+            }
+          ]
+        },
+        order: [
+          ['name', 'ASC']
+        ]
+      })
+
+      res.json(new Response(users))
+
+    } else if (name) {
+      const users = await models.User.findAll({
+        where: {
+          [Op.and]: [
+            {
+              name: {
+                [Op.iLike]: `%${name}%`
+              }
+            }
+          ]
+        },
+        order: [
+          ['name', 'ASC']
+        ]
+      })
+
+      res.json(new Response(users))
+    } else if (phone) {
+      const users = await models.User.findAll({
+        where: {
+          [Op.and]: [
+            {
+              phone: {
+                [Op.iLike]: `%${phone}%`
+              }
+            }
+          ]
+        },
+        order: [
+          ['name', 'ASC']
+        ]
+      })
+
+      res.json(new Response(users))
+
+    } else {
+      const users = await models.User.findAll({
+        order: [
+          ['name', 'ASC']
+        ]
+      })
+
+      res.json(new Response(users))
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(new Response(error, false))
   }
 });
 
