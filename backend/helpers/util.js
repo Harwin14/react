@@ -1,7 +1,7 @@
 class Response {
     constructor(data, success = true){
         this.data = data
-        this.succes = success
+        this.success = success
     }
 }
 

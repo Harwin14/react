@@ -13,14 +13,14 @@ export default function ContactList(props) {
                 </tr>
             </thead>
             <tbody>
-                {props.data.map((user, index) => 
+                {props.data.map((item, index) => 
                         <ContactItem
-                        key={user.id}
+                        key={item.id}
                         no={index + 1}
-                        contact={user}
-                        remove={() => props.remove(user.id)}
-                        update={(name, phone) => props.update(user.id, name, phone)}
-                        resend={() => props.resend(user.id, user.name, user.phone)} 
+                        contact={item}
+                        remove={() => props.remove(item.id)}
+                        update={(name, phone) => props.update(item.id, name, phone)}
+                        resend={() => props.resend(item.id, item.name, item.phone)} 
                         />
                 )}
             </tbody>

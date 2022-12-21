@@ -35,10 +35,10 @@ export default class ContactItem extends Component {
                 <tr className="r">
                     <td>{this.props.no}</td>
                     <td>
-                        <input id="name" name="name" type="text" className="form-control" value={this.state.name} onChange={this.handleInputChange} />
+                        <input name="name" type="text" className="form-control" value={this.state.name} onChange={this.handleInputChange} />
                     </td>
                     <td>
-                        <input name="phone" id="name" type="text" className="form-control" value={this.state.phone} onChange={this.handleInputChange} />
+                        <input name="phone" type="text" className="form-control" value={this.state.phone} onChange={this.handleInputChange} />
                     </td>
                     <td>
                         <button className="btn btn-p" type="button"

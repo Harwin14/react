@@ -26,7 +26,7 @@ router.get('/', async (req, res, next) => {
           ]
         },
         order: [
-          ['name', 'ASC']
+          ['id', 'ASC']
         ]
       })
 
@@ -44,7 +44,7 @@ router.get('/', async (req, res, next) => {
           ]
         },
         order: [
-          ['name', 'ASC']
+          ['id', 'ASC']
         ]
       })
 
@@ -61,7 +61,7 @@ router.get('/', async (req, res, next) => {
           ]
         },
         order: [
-          ['name', 'ASC']
+          ['id', 'ASC']
         ]
       })
 
@@ -70,7 +70,7 @@ router.get('/', async (req, res, next) => {
     } else {
       const users = await models.User.findAll({
         order: [
-          ['name', 'ASC']
+          ['id', 'ASC']
         ]
       })
 

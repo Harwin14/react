@@ -165,22 +165,40 @@ export default class ContactBox extends Component {
         }
     }
 
+    // async componentDidMount() {
+    //     try {
+    //         const { data } = await request.get('users')
+    //         console.log(data)
+    //         if (data) {
+    //             this.setState({
+    //                 contacts: data.data.map(user => {
+    //                     user.sent = true
+    //                     return user
+    //                 })
+    //             })
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
     async componentDidMount() {
         try {
             const { data } = await request.get('users')
-            if (data) {
+            if (data.success) {
                 this.setState({
-                    contacts: data.data.map(user => {
-                        user.sent = true
-                        return user
+                    contacts: data.data.map(item => {
+                        item.sent = true
+                        return item
                     })
                 })
+            } else {
+                alert('Failed get data')
             }
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+            console.log(error)
         }
     }
-
 
 
     addContact = async (name, phone) => {
@@ -200,25 +218,27 @@ export default class ContactBox extends Component {
         });
         try {
             const { data } = await request.post(`users`, { name, phone })
-            if (data) {
+            if (data.success) {
                 this.setState((state) => ({
-                    contacts: state.contacts.map(user => {
-                        if (user.id === id) {
+                    contacts: state.contacts.map(item => {
+                        if (item.id === id) {
                             return { ...data.data, sent: true }
                         }
-                        return user
+                        return item
                     })
                 }))
+            } else {
+                console.log(data.data)
             }
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+            console.log(error)
             this.setState((state) => ({
-                contacts: state.contacts.map(user => {
-                    if (user.id === id) {
-                        return { ...user, sent: false }
+                contacts: state.contacts.map(item => {
+                    if (item.id === id) {
+                        return { ...item, sent: false }
 
                     }
-                    return user
+                    return item
                 })
             }))
         }
@@ -227,7 +247,7 @@ export default class ContactBox extends Component {
     removeContact = async (id) => {
         try {
             const { data } = await request.delete(`users/${id}`)
-            if (data) {
+            if (data.success) {
                 this.setState((state) => ({
                     contacts: state.contacts.filter((props) => props.id !== id)
                 }))
@@ -240,13 +260,13 @@ export default class ContactBox extends Component {
     updateContact = async (id, name, phone) => {
         try {
             const { data } = await request.put(`users/${id}`, { name, phone })
-            if (data) {
+            if (data.success) {
                 this.setState((state) => ({
-                    contacts: state.contacts.map(user => {
-                        if (user.id === id) {
+                    contacts: state.contacts.map(item => {
+                        if (item.id === id) {
                             return { ...data.data, sent: true }
                         }
-                        return user
+                        return item
                     })
                 }))
             }
@@ -255,24 +275,25 @@ export default class ContactBox extends Component {
             console.log(err)
         }
     }
-    resendContact = async (name, phone) => {
-        try {
-            const { data } = await request.get(`users`, { name, phone })
-            console.log(data)
-            if (data) {
-                this.setState({
-                    contacts: data.data.map(user => {
-                        user.sent = true
-                        return user
-                    })
-                })
-            }
-        } catch (err) {
-            alert('Failed to resend data')
-            console.log(err)
-        }
-    }
 
+    resendContact = async (id, name, phone) => {
+        try {
+            const { data } = await request.post(`users`, { name, phone })
+            if (data.success) {
+                this.setState((state) => ({
+                    contacts: state.contacts.map(item => {
+                        if (item.id === id) {
+                            return { ...data.data, sent: true }
+                        }
+                        return item
+                    })
+                }))
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 
 
     // performSearch = (name = {}) => {
@@ -289,11 +310,11 @@ export default class ContactBox extends Component {
     //         });
 
     // }
-  
+
     searchContact = async (query = {}) => {
         try {
             console.log(query)
-            const { data } = await request.get(`users`,{ params:  { name: query } })
+            const { data } = await request.get(`users`, { params: { name: query } })
             console.log(data)
             if (data) {
                 this.setState({
@@ -305,7 +326,7 @@ export default class ContactBox extends Component {
             }
         } catch (err) {
             alert('Failed to resend data')
-            console.log(err) 
+            console.log(err)
         }
     }
 
