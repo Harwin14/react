@@ -27,7 +27,7 @@ export default class ContactItem extends Component {
     handleUpdate = () => {
         this.props.update(this.state.name, this.state.phone)
         this.setState({ isEdit: false })
-    }
+    } 
 
     render() {
         if (this.state.isEdit) {
