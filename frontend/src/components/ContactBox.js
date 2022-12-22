@@ -24,7 +24,7 @@ export default class ContactBox extends Component {
                 phone: ''
             }
         }
-    }   
+    }    
     async componentDidMount() {
        this.loadContact()
     }
