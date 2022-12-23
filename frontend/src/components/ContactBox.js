@@ -9,64 +9,59 @@ import { faContactBook } from '@fortawesome/free-solid-svg-icons'
 //import klo data mau dimasukin
 //export untuk export data
 const request = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://localhost:3001/',
     headers: { 'X-Custom-Header': 'foobar' }
 });
 
 export default class ContactBox extends Component {
     constructor(props) {
         super(props)
+        this.params = {
+            page: 1,
+            name: '',
+            phone: ''
+        }
         this.state = {
-            contacts: [],
-            params: {
-                page: 1,
-                name: '',
-                phone: ''
-            }
+            contacts: []
         }
     }
     async componentDidMount() {
-       this.loadContact()
+        this.loadContact()
     }
 
     loadContact = async () => {
         try {
-            const { data } = await request.get('users', (this.state.params))
-            if (data.success) {
-                this.setState({
-                    contacts: data.data.map(item => {
-                        item.sent = true
-                        return item
-                    })
-                })
-            } else {
-                alert('Failed get data')
-            }
+            const { data } = await request.get('users', { params: this.params })
+            this.setState(state => ({
+                contacts: [...(this.params.page === 1 ? [] : state.contacts), ...data.data.users.map(item => {
+                    item.sent = true
+                    return item
+                })]
+            }))
+            this.params.pages = data.data.pages
         } catch (error) {
             console.log(error)
         }
     }
-    searchContact = async (name, phone) => {
-        this.setState((state) => {
-            state.params = {...state.params, name, phone}
-        })
+
+    loadMore = () => {
+        if (this.params.page <= this.params.pages) {
+            this.params = ({
+                ...this.params,
+                page: this.params.page + 1
+            })
+            this.loadContact()
+        }
     }
-    // searchContact = async (name, phone) => {
-    //     try {
-    //         const { data } = await request.get(`users`, { params: { name, phone } })
-    //         if (data) {
-    //             this.setState({
-    //                 contacts: data.data.map(user => {
-    //                     user.sent = true
-    //                     return user
-    //                 })
-    //             })
-    //         }
-    //     } catch (err) {
-    //         alert('Failed to resend data')
-    //         console.log(err)
-    //     }
-    // }
+
+    searchContact = async (name, phone) => {
+        try {
+            this.params = { ...this.params, name, phone, page: 1 }
+            this.loadContact()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     addContact = async (name, phone) => {
         const id = Date.now()
@@ -170,22 +165,34 @@ export default class ContactBox extends Component {
 
     render() {
         return (
-            <div className="container shadow">
-                <div className="card">
-                    <div className="card-header">
-                        <h1 className="text-center font"><FontAwesomeIcon icon={faContactBook} /> Phone Book Apps</h1>
+            <div>
+                <div className="container shadow">
+                    <div className="card">
+                        <div className="card-header">
+                            <h1 className="text-center font"><FontAwesomeIcon icon={faContactBook} /> Phone Book Apps</h1>
+                        </div>
+                        <div className="card-body">
+                            <ContactForm add={this.addContact} onSearch={this.searchContact} />
+                        </div>
                     </div>
-                    <div className="card-body">
 
-                        <ContactForm add={this.addContact} onSearch={this.searchContact} />
+                </div>
+                <div>
+
+                    <div className="container shadow"> 
+                    
+                        <div className="card-body shadow px-6" >
+                            <ContactList
+                                data={this.state.contacts}
+                                update={this.updateContact}
+                                remove={this.removeContact}
+                                resend={this.resendContact}
+                                loadMore={this.loadMore}
+                            />
+                            </div>
+                     
                     </div>
                 </div>
-                <ContactList
-                    data={this.state.contacts}
-                    update={this.updateContact}
-                    remove={this.removeContact}
-                    resend={this.resendContact}
-                />
             </div>
         )
     }

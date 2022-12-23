@@ -8,7 +8,7 @@ const { Op } = require('sequelize')
 router.get('/', async (req, res, next) => {
   try {
     const { page, name, phone } = req.query
-    const limit = 3
+    const limit = 6
     const offset = (page - 1) * limit
     const total = await models.User.count()
     const pages = Math.ceil(total / limit)
